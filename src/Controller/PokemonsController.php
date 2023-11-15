@@ -19,11 +19,10 @@ class PokemonsController extends AbstractController {
             return $this -> render("Pokemons/showPokemon.html.twig", ["pokemon" => $pokemon]);
     }
 
-
     #[Route("/pokemons")]
-public function listPokemons(){
+    
+    public function listPokemons(){
         $pokemons = [
-
             [
                 "name" => "Bulbasaur",
                 "description" => "Bulbasaur is the first Pokémon species discovered in the wild. It",
@@ -48,9 +47,7 @@ public function listPokemons(){
                 "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
                 "code" => "001"
             ]
-
         ];
         return $this -> render("Pokemons/listPokemons.html.twig", ["pokemons" => $pokemons]);
-
     }
 }
