@@ -24,7 +24,7 @@ class PokemonsController extends AbstractController {
     public function listPokemons(){
         $pokemons = [
             [
-                "name" => "Bulbasaur",
+                "name" => "Bulbasaurrrrrr",
                 "description" => "Bulbasaur is the first Pokémon species discovered in the wild. It",
                 "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
                 "code" => "001"
