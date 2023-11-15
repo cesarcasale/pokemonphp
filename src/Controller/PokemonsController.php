@@ -2,52 +2,68 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PokemonsController extends AbstractController {
 
-    #[Route("/pokemon")]
+    #[Route("/pokemon/{id}", name:"pokemonInfo")]
 
-    public function getPokemon(){
-        $pokemon = [
-            "name" => "Bulbasaur",
-            "description" => "Bulbasaur is the first Pokémon species discovered in the wild. It",
-            "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
-            "code" => "001"
-        ];
+    public function getPokemon(EntityManagerInterface $doctrine, $id){
+
+        $repositorio = $doctrine -> getRepository(Pokemon::class);
+
+        $pokemon = $repositorio -> find($id);
+
             return $this -> render("Pokemons/showPokemon.html.twig", ["pokemon" => $pokemon]);
     }
 
-    #[Route("/pokemons")]
+        #[Route("/insert/pokemon")]
+
+    public function insertPokemon(EntityManagerInterface $doctrine){
+        $pokemon = new Pokemon();
+        $pokemon2 = new Pokemon();
+        $pokemon3 = new Pokemon();
+
+
+        $pokemon -> setName("Bulbasaur");
+        $pokemon -> setDescription("Bulbasaur is the first Pokémon species discovered in the wild. It");
+        $pokemon -> setImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png");
+        $pokemon -> setCode(1);
+
+        $pokemon2 -> setName("charmander");
+        $pokemon2 -> setDescription("Bulbasaur is the first Pokémon species discovered in the wild. It");
+        $pokemon2 -> setImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png");
+        $pokemon2 -> setCode(1);
+
+        $pokemon3 -> setName("squirtle");
+        $pokemon3 -> setDescription("Bulbasaur is the first Pokémon species discovered in the wild. It");
+        $pokemon3 -> setImage("https://assets.pokemon.com/assets/cms2/img/pokedex/full/254.png");
+        $pokemon3 -> setCode(1);
+
+        $doctrine -> persist($pokemon);
+        $doctrine -> persist($pokemon2);
+        $doctrine -> persist($pokemon3);
+
+        $doctrine -> flush();
+
+        return new Response("Pokemon insertado correctamente");
+    }
+
+    #[Route("/pokemons", name:"listPokemon")]
     
-    public function listPokemons(){
-        $pokemons = [
-            [
-                "name" => "Bulbasaur",
-                "description" => "Bulbasaur is the first Pokémon species discovered in the wild. It",
-                "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
-                "code" => "001"
-            ],
-            [
-                "name" => "charmander",
-                "description" => "charmander is the first Pokémon species discovered in the wild. It",
-                "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
-                "code" => "002"
-            ],
-            [
-                "name" => "squirtle",
-                "description" => "squirtle is the first Pokémon species discovered in the wild. It",
-                "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png",
-                "code" => "001"
-            ],
-            [
-                "name" => "pikachu",
-                "description" => "pikachu is the first Pokémon species discovered in the wild. It",
-                "image" => "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
-                "code" => "001"
-            ]
-        ];
+    public function listPokemons(EntityManagerInterface $doctrine){
+
+        $repositorio = $doctrine -> getRepository(Pokemon::class);
+
+        $pokemons = $repositorio -> findAll();
+
         return $this -> render("Pokemons/listPokemons.html.twig", ["pokemons" => $pokemons]);
     }
+
+
 }
