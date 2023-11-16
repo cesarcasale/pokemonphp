@@ -65,5 +65,4 @@ class PokemonsController extends AbstractController {
         return $this -> render("Pokemons/listPokemons.html.twig", ["pokemons" => $pokemons]);
     }
 
-
 }
