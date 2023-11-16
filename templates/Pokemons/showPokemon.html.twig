@@ -13,7 +13,10 @@
                 </div>
                 <div class="row">
                     <ul>
-                        {# DEBILIDADES #}
+                        {% for debilidad in pokemon.debilidades %}
+                        <li> {{ debilidad.name }}</li>
+
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
