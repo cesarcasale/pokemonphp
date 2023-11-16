@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class PokemonsController extends AbstractController
 {
@@ -140,6 +141,12 @@ class PokemonsController extends AbstractController
             return $this->redirectToRoute("listPokemon");
         }
         return $this->render("Pokemons/createPokemon.html.twig", ["Pokemonform" => $form]);
+    }
+
+    #[Route("/react/pokemon")]
+    public function reactPokemon()
+    {
+        return $this->render("Pokemons/reactPokemon.html.twig");
     }
 }
 
