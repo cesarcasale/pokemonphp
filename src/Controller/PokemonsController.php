@@ -90,6 +90,7 @@ class PokemonsController extends AbstractController
         return $this->render("Pokemons/listPokemons.html.twig", ["pokemons" => $pokemons]);
     }
 
+
     #[Route("/delete/pokemon/{id}", name: "deletepokemon")]
 
     public function deletePokemon($id, EntityManagerInterface $doctrine)
@@ -104,3 +105,4 @@ class PokemonsController extends AbstractController
         return $this->redirectToRoute("listPokemon");
     }
 }
+
